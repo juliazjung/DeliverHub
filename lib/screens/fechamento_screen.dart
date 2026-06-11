@@ -36,9 +36,15 @@ class _FechamentoScreenState extends State<FechamentoScreen> {
 
   @override
   void dispose() {
-    for (final c in _entregadorControllers.values) c.dispose();
-    for (final c in _valorRecebidoControllers.values) c.dispose();
-    for (final c in _valorInicialControllers.values) c.dispose();
+    for (final c in _entregadorControllers.values) {
+      c.dispose();
+    }
+    for (final c in _valorRecebidoControllers.values) {
+      c.dispose();
+    }
+    for (final c in _valorInicialControllers.values) {
+      c.dispose();
+    }
     _dinheiroCaixaController.dispose();
     _valorRecebidoTotalController.dispose();
     super.dispose();
@@ -298,7 +304,7 @@ class _FechamentoScreenState extends State<FechamentoScreen> {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: _corStatus(p.status).withOpacity(0.1),
+                                  color: _corStatus(p.status).withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
@@ -724,9 +730,9 @@ class _FechamentoScreenState extends State<FechamentoScreen> {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: corSaldo.withOpacity(0.08),
+                    color: corSaldo.withValues(alpha: 0.08),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: corSaldo.withOpacity(0.3)),
+                    border: Border.all(color: corSaldo.withValues(alpha: 0.3)),
                   ),
                   child: Row(
                     children: [
@@ -782,9 +788,9 @@ class _FechamentoScreenState extends State<FechamentoScreen> {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: cor.withOpacity(0.08),
+        color: cor.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: cor.withOpacity(0.3)),
+        border: Border.all(color: cor.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -900,9 +906,9 @@ class _FechamentoScreenState extends State<FechamentoScreen> {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: cor.withOpacity(0.08),
+          color: cor.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: cor.withOpacity(0.3)),
+          border: Border.all(color: cor.withValues(alpha: 0.3)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

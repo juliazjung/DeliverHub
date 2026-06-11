@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,16 +21,20 @@ Future<void> _restaurarSessao() async {
   if (user == null) return;
 
   try {
+    // Valida se o token ainda é válido
+    await user.getIdToken(true);
+
     final doc = await FirebaseFirestore.instance
         .collection('usuarios')
         .doc(user.uid)
         .get();
+
     if (doc.exists) {
       final data = doc.data()!;
       final empresaDoc = await FirebaseFirestore.instance
-        .collection('empresas')
-        .doc(data['empresaId'])
-        .get();
+          .collection('empresas')
+          .doc(data['empresaId'])
+          .get();
       SessionService().iniciar(
         empresaId: data['empresaId'] ?? '',
         cnpj: data['cnpj'] ?? '',
@@ -39,11 +42,10 @@ Future<void> _restaurarSessao() async {
         impressoraPadrao: empresaDoc.data()?['impressoraPadrao'] ?? '',
       );
     } else {
-      // Documento não encontrado — faz logout para evitar crash
       await FirebaseAuth.instance.signOut();
     }
   } catch (e) {
-    // Erro ao buscar — faz logout para evitar crash
+    // Token inválido ou cache corrompido — limpa tudo
     await FirebaseAuth.instance.signOut();
   }
 }

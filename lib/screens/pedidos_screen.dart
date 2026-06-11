@@ -201,7 +201,7 @@ class _PedidosScreenState extends State<PedidosScreen> {
                                             decoration: BoxDecoration(
                                               color: _corStatus(
                                                 p.status,
-                                              ).withOpacity(0.1),
+                                              ).withValues(alpha: 0.1),
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                             ),
@@ -382,7 +382,9 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
 
   @override
   void dispose() {
-    for (final c in _controllers.values) c.dispose();
+    for (final c in _controllers.values) {
+      c.dispose();
+    }
     _freteController.dispose();
     _totalController.dispose();
     _clienteNome.dispose();
@@ -736,7 +738,7 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
                         children: [
                           Expanded(
                             child: DropdownButtonFormField<String>(
-                              value: _formaPagamento,
+                              initialValue: _formaPagamento,
                               decoration: const InputDecoration(
                                 labelText: 'Forma de Pagamento',
                                 border: OutlineInputBorder(),
@@ -778,7 +780,7 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: DropdownButtonFormField<String>(
-                              value: _formato,
+                              initialValue: _formato,
                               decoration: const InputDecoration(
                                 labelText: 'Formato',
                                 border: OutlineInputBorder(),
@@ -803,7 +805,7 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
                           const SizedBox(width: 12),
                           Expanded(
                             child: DropdownButtonFormField<String>(
-                              value: _status,
+                              initialValue: _status,
                               decoration: const InputDecoration(
                                 labelText: 'Status',
                                 border: OutlineInputBorder(),
@@ -1060,7 +1062,7 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: _itens.length,
-            separatorBuilder: (_, __) => const Divider(height: 1),
+            separatorBuilder: (_, _) => const Divider(height: 1),
             itemBuilder: (_, i) => _buildLinhaItem(i),
           ),
         ],
@@ -1354,7 +1356,7 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: _bebidas.length,
-            separatorBuilder: (_, __) => const Divider(height: 1),
+            separatorBuilder: (_, _) => const Divider(height: 1),
             itemBuilder: (_, i) => _buildLinhaBebida(i),
           ),
         ],
@@ -1635,8 +1637,9 @@ class _CadastroPedidoDialogState extends State<CadastroPedidoDialog> {
   Future<void> _tentarImprimir(Pedido pedido) async {
     final resultado = await PrintService().imprimirPedido(pedido);
     if (resultado.sucesso) {
-      if (pedido.id != null)
+      if (pedido.id != null) {
         await widget.service.marcarImpresso(pedido.id!, true);
+      }
     } else if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

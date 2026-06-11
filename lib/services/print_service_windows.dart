@@ -163,7 +163,7 @@ class PrintService {
             '${item.quantidade} ${item.tipo.toUpperCase()} ${item.sabor.toUpperCase()}'
                 .trim();
         final valor =
-            'R' + String.fromCharCode(0x24) + ' ${(item.valor * item.quantidade).toStringAsFixed(2)}';
+            'R${String.fromCharCode(0x24)} ${(item.valor * item.quantidade).toStringAsFixed(2)}';
 
         bytes += generator.row([
           PosColumn(
@@ -190,7 +190,7 @@ class PrintService {
           styles: const PosStyles(height: PosTextSize.size2, width: PosTextSize.size2),  
         ),
         PosColumn(
-          text: 'R' + String.fromCharCode(0x24) + ' ${pedido.frete.toStringAsFixed(2)}',
+          text: 'R${String.fromCharCode(0x24)} ${pedido.frete.toStringAsFixed(2)}',
           width: 6,
           styles: const PosStyles(height: PosTextSize.size2, width: PosTextSize.size2, align: PosAlign.right),
         ),
@@ -200,7 +200,7 @@ class PrintService {
     bytes += generator.row([
       PosColumn(text: 'TOTAL:', width: 6, styles: const PosStyles(height: PosTextSize.size2, width: PosTextSize.size2, bold: true)),
       PosColumn(
-        text: 'R' + String.fromCharCode(0x24) + ' ${pedido.valorTotal.toStringAsFixed(2)}',
+        text: 'R${String.fromCharCode(0x24)} ${pedido.valorTotal.toStringAsFixed(2)}',
         width: 6,
         styles: const PosStyles(height: PosTextSize.size2, width: PosTextSize.size2, bold: true, align: PosAlign.right),
       ),
@@ -251,7 +251,7 @@ class PrintService {
       
       if (!pedido.clienteCidade.toUpperCase().contains('ENTRE')) {
         bytes += generator.text(
-          '${pedido.clienteCidade}',
+          pedido.clienteCidade,
           styles: const PosStyles(height: PosTextSize.size2, width: PosTextSize.size2),  
         );
       }

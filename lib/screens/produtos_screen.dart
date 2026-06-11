@@ -160,7 +160,7 @@ class _ProdutosScreenState extends State<ProdutosScreen> {
                                             decoration: BoxDecoration(
                                               color: _corTipo(
                                                 p.tipo,
-                                              ).withOpacity(0.1),
+                                              ).withValues(alpha: 0.1),
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                             ),
@@ -290,7 +290,9 @@ class _CadastroProdutoDialogState extends State<CadastroProdutoDialog> {
   @override
   void dispose() {
     _nome.dispose();
-    for (final s in _subprodutos) s.dispose();
+    for (final s in _subprodutos) {
+      s.dispose();
+    }
     super.dispose();
   }
 
@@ -408,7 +410,7 @@ class _CadastroProdutoDialogState extends State<CadastroProdutoDialog> {
                       Expanded(
                         flex: 2,
                         child: DropdownButtonFormField<String>(
-                          value: _tipo,
+                          initialValue: _tipo,
                           decoration: const InputDecoration(
                             labelText: 'Tipo',
                             border: OutlineInputBorder(),
@@ -440,7 +442,7 @@ class _CadastroProdutoDialogState extends State<CadastroProdutoDialog> {
                           ),
                           Switch(
                             value: _ativo,
-                            activeColor: const Color(0xFFE53935),
+                            activeThumbColor: const Color(0xFFE53935),
                             onChanged: (v) => setState(() => _ativo = v),
                           ),
                         ],
@@ -475,7 +477,7 @@ class _CadastroProdutoDialogState extends State<CadastroProdutoDialog> {
                               selected: selecionado,
                               selectedColor: const Color(
                                 0xFFE53935,
-                              ).withOpacity(0.15),
+                              ).withValues(alpha: 0.15),
                               checkmarkColor: const Color(0xFFE53935),
                               onSelected: (v) => setState(() {
                                 if (v) {

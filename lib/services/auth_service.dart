@@ -7,6 +7,9 @@ class AuthService {
   final _db = FirebaseFirestore.instance;
 
   Future<UserCredential?> login(String email, String password) async {
+    // Garante sessão limpa antes de logar
+    await _auth.signOut();
+    
     final credential = await _auth.signInWithEmailAndPassword(
       email: email,
       password: password,

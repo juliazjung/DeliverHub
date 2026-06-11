@@ -109,7 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                             decoration: BoxDecoration(
                               color: selected
-                                  ? const Color(0xFFE53935).withOpacity(0.15)
+                                  ? const Color(0xFFE53935).withValues(alpha: 0.15)
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -210,7 +210,7 @@ class _MainScreenState extends State<MainScreen> {
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
+                            color: Colors.black.withValues(alpha: 0.05),
                             blurRadius: 4,
                             offset: const Offset(0, 2),
                           ),
